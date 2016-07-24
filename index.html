@@ -1,0 +1,49 @@
+<!doctype html>
+<html ng-app="todo">
+<head>
+	<title>Angular js List</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/libs/angular.min.js"></script>
+	<script src="js/libs/angular-local-storage.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/directives/angular.ngEnter.js"></script>
+	<script src="js/directives/angular.clickToEdit.js"></script>
+</head>
+<body ng-controller="TodoCtrl" ng-init="init()">
+	<div class="container col-xs-12" ng-controller="TodoCtrl">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="list-group">
+					<span ng-repeat="todos in model" class="list-name">
+					{{todos.name}}
+						<span class="bage-style">{{todos.list.length}}</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<ul class="list-unstyled" ng-repeat="todos in model track by $index" ng-model="todos.list" ng-show="$index === currentShow">
+					<li class="todoTask" ng-repeat="todo in todos.list ">
+						<div class="field">
+						    <div click-to-edit="todo.taskName"></div>
+						</div>		
+						<button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteTodo(todo)">&times;</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row" id="todoAdd">
+			<div class="col-xs-12">
+				<div class="form-group">
+					<input class="todoField" id="newTodoField" type="text" ng-model="newTodo" placeholder="Add New Item" ng-enter>
+					<button id="todoSubmit" class="btn btn-default" ng-click="addTodo()">Add</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
