@@ -32,16 +32,9 @@ App.controller("TodoCtrl", function ($scope, localStorageService) {
 		var index = $scope.model[$scope.currentShow].list.indexOf(item);
 		$scope.model[$scope.currentShow].list.splice(index, 1);
 	};
-
-	// $scope.editTodo = function (i) {
-	// 	$scope.currentShow = i;
-	// };
-
-
 	$scope.$watch("model",function (newVal,oldVal) {
 		if (newVal !== null && angular.isDefined(newVal) && newVal!==oldVal) {
 			localStorageService.add("todoList",angular.toJson(newVal));
 		}
 	},true);
-
 });
